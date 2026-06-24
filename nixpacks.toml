@@ -1,2 +1,2 @@
 [phases.setup]
-nixPkgs = ["...", "expat", "gdal", "proj", "geos"]
+aptPkgs = ["...", "libexpat1", "libgdal-dev", "libproj-dev", "libgeos-dev"]
