@@ -20,7 +20,7 @@ st.set_page_config(
 )
 
 from src.config import logger
-from src.ui.styles import inject_custom_styles
+from src.ui.styles import inject_custom_styles, app_header, geo_card, end_card, stat_row, section_label, divider
 from src.ui.cesium_flyover import render_drone_flyover_tab
 from src.ui.components import render_tkgm_selectors, render_folium_map
 from src.ui.plots import plot_ndvi_time_series, plot_pixel_distribution
@@ -57,6 +57,7 @@ from src.dataset.ndvi import (
 # CSS Enjeksiyonu
 # ─────────────────────────────────────────────────────────────
 inject_custom_styles()
+app_header()
 
 # Query parameters check for GPS location
 query_params = st.query_params
@@ -112,9 +113,9 @@ if "gps_lat" in query_params and "gps_lon" in query_params:
 def render_gee_timelapse_tab(geometry_geojson, key_suffix=""):
     import time
     st.markdown(f"""
-    <div class="card">
-        <div class="card-title">🛰️ Uydu Zaman Tüneli (GEE)</div>
-        <div class="card-subtitle">Google Earth Engine gücüyle seçilen alanın bulut arındırılmış Sentinel-2 timelapse animasyonunu, videosunu ve fotoğraf setini oluşturun.</div>
+    <div class="geo-card">
+        <div class="geo-card-title">🛰️ Uydu Zaman Tüneli (GEE)</div>
+        <div class="geo-card-desc">Google Earth Engine gücüyle seçilen alanın bulut arındırılmış Sentinel-2 timelapse animasyonunu, videosunu ve fotoğraf setini oluşturun.</div>
     """, unsafe_allow_html=True)
     
     from src.satellite.gee_timelapse import (
@@ -256,9 +257,9 @@ def render_gee_timelapse_tab(geometry_geojson, key_suffix=""):
 
 def render_uav_simulator_tab(geometry_geojson, key_suffix=""):
     st.markdown(f"""
-    <div class="card">
-        <div class="card-title">🛸 3D Drone Uçuş Simülatörü & Sentetik Veri Fabrikası</div>
-        <div class="card-subtitle">Seçili alandan kalkan bir drone'un uçuş rotasını 3D perspektifle simüle edin, HUD telemetrisi ile video üretin ve ML modelleri için sentetik veri seti toplayın.</div>
+    <div class="geo-card">
+        <div class="geo-card-title">🛸 3D Drone Uçuş Simülatörü & Sentetik Veri Fabrikası</div>
+        <div class="geo-card-desc">Seçili alandan kalkan bir drone'un uçuş rotasını 3D perspektifle simüle edin, HUD telemetrisi ile video üretin ve ML modelleri için sentetik veri seti toplayın.</div>
     """, unsafe_allow_html=True)
     
     # Parametreleri al
@@ -508,9 +509,9 @@ def render_uav_simulator_tab(geometry_geojson, key_suffix=""):
 def render_3d_terrain_tab(geometry_geojson, key_suffix=""):
     """3D Google Earth Tarihsel Timelapse — GEE (earth-500319) destekli."""
     st.markdown(f"""
-    <div class="card">
-        <div class="card-title">🌍 3D Google Earth Tarihsel Timelapse</div>
-        <div class="card-subtitle">
+    <div class="geo-card">
+        <div class="geo-card-title">🌍 3D Google Earth Tarihsel Timelapse</div>
+        <div class="geo-card-desc">
             Gerçek Google Earth Engine verisi (SRTM yükseklik + Sentinel-2 tarihsel sahneler)
             ile seçili tarlanın 3D perspektif kamera dönüş videosu üretilir.
             Birebir Google Earth görünümü &nbsp;·&nbsp; GEE Proje: <code>earth-500319</code>
@@ -635,8 +636,8 @@ with st.sidebar:
     <div class="sidebar-logo">
         <div class="sidebar-logo-icon">🛰️</div>
         <div>
-            <div class="sidebar-logo-text">GEO-AGRI</div>
-            <div class="sidebar-logo-sub">Agricultural Remote Sensing</div>
+            <div class="sidebar-logo-name">GEO-AGRI</div>
+            <div class="sidebar-logo-ver">v2.0 · Agricultural RS</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -843,9 +844,9 @@ document.getElementById('gps-btn').addEventListener('click', function() {
 """
 
 st.markdown("""
-<div class="card" style="margin-bottom: 24px;">
-    <div class="card-title">⚡ Hızlı Başlangıç: Tek Tıkla Konum Analizi & ML Veri Seti</div>
-    <div class="card-subtitle">Enlem/Boylam girin veya cihazınızın GPS'ini alın. Tek tıkla uydu verilerini, zaman tüneli videosunu ve derin öğrenmeye hazır ML veri setini oluşturun.</div>
+<div class="geo-card" style="margin-bottom: 24px;">
+    <div class="geo-card-title">⚡ Hızlı Başlangıç: Tek Tıkla Konum Analizi & ML Veri Seti</div>
+    <div class="geo-card-desc">Enlem/Boylam girin veya cihazınızın GPS'ini alın. Tek tıkla uydu verilerini, zaman tüneli videosunu ve derin öğrenmeye hazır ML veri setini oluşturun.</div>
 """, unsafe_allow_html=True)
 
 col_quick1, col_quick2, col_quick3 = st.columns([1, 1, 2])
@@ -1007,16 +1008,16 @@ col_left, col_right = st.columns([1, 2])
 
 with col_left:
     st.markdown("""
-    <div class="card" style="padding-bottom: 8px !important;">
-        <div class="card-title">🏛️ Kadastro Sorgu</div>
+    <div class="geo-card" style="padding-bottom: 8px !important;">
+        <div class="geo-card-title">🏛️ Kadastro Sorgu</div>
     """, unsafe_allow_html=True)
     render_tkgm_selectors()
     st.markdown("</div>", unsafe_allow_html=True)
 
 with col_right:
     st.markdown("""
-    <div class="card" style="padding-bottom: 8px !important;">
-        <div class="card-title">🗺️ Alan Belirleme</div>
+    <div class="geo-card" style="padding-bottom: 8px !important;">
+        <div class="geo-card-title">🗺️ Alan Belirleme</div>
     """, unsafe_allow_html=True)
     render_folium_map()
     st.markdown("</div>", unsafe_allow_html=True)
@@ -1037,8 +1038,8 @@ if "active_geometry" in st.session_state:
         
     # KPI Strip
     st.markdown("""
-    <div class="card">
-        <div class="card-title">📊 Seçili Alan Özeti</div>
+    <div class="geo-card">
+        <div class="geo-card-title">📊 Seçili Alan Özeti</div>
     """, unsafe_allow_html=True)
     
     col_m1, col_m2, col_m3, col_m4 = st.columns(4)
@@ -1388,7 +1389,7 @@ if st.session_state.get("analysis_mode") == "Dağıtık Veri Fabrikası (10 Yıl
     df_trends = pd.DataFrame({"Tarih": flat_dates, "Değer": flat_trends})
     
     # ─── KPI Strip ───
-    st.markdown("""<div class="card">""", unsafe_allow_html=True)
+    st.markdown("""<div class="geo-card">""", unsafe_allow_html=True)
     col_k1, col_k2, col_k3, col_k4 = st.columns(4)
     
     with col_k1:
@@ -1431,8 +1432,8 @@ if st.session_state.get("analysis_mode") == "Dağıtık Veri Fabrikası (10 Yıl
     # ─── TAB 1: Time Series ───
     with tab_series:
         st.markdown(f"""
-        <div class="card">
-            <div class="card-title">📈 {selected_index} Zaman Serisi ({min(sorted_years)}–{max(sorted_years)})</div>
+        <div class="geo-card">
+            <div class="geo-card-title">📈 {selected_index} Zaman Serisi ({min(sorted_years)}–{max(sorted_years)})</div>
         """, unsafe_allow_html=True)
         
         import plotly.graph_objects as go
@@ -1451,13 +1452,30 @@ if st.session_state.get("analysis_mode") == "Dağıtık Veri Fabrikası (10 Yıl
         fig.update_layout(
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
-            font=dict(family="Inter, sans-serif", color="#334155", size=12),
-            xaxis=dict(gridcolor="rgba(0,0,0,0.04)", title="", tickfont=dict(size=11, color="#94A3B8")),
-            yaxis=dict(gridcolor="rgba(0,0,0,0.04)", title=f"{selected_index}", range=[-0.2, 1.0], tickfont=dict(size=11, color="#94A3B8")),
-            margin=dict(l=40, r=20, t=20, b=30),
-            height=380,
+            font=dict(family="Inter, sans-serif", color="#94A3B8", size=11),
+            xaxis=dict(
+                gridcolor="rgba(255,255,255,0.04)",
+                title="", zeroline=False,
+                tickfont=dict(size=10, color="#475569"),
+                linecolor="rgba(255,255,255,0.08)",
+            ),
+            yaxis=dict(
+                gridcolor="rgba(255,255,255,0.04)",
+                title=f"{selected_index}",
+                range=[-0.1, 1.0],
+                tickfont=dict(size=10, color="#475569"),
+                titlefont=dict(size=11, color="#64748B"),
+                zeroline=False,
+                linecolor="rgba(255,255,255,0.08)",
+            ),
+            margin=dict(l=45, r=20, t=16, b=35),
+            height=360,
             hovermode="x unified",
-            hoverlabel=dict(bgcolor="#FFF", bordercolor="#E2E8F0", font=dict(size=12, color="#1E293B")),
+            hoverlabel=dict(
+                bgcolor="#1A2035",
+                bordercolor="#1F2740",
+                font=dict(size=12, color="#E2E8F0", family="Inter"),
+            ),
         )
         st.plotly_chart(fig, use_container_width=True)
         st.markdown("</div>", unsafe_allow_html=True)
@@ -1465,8 +1483,8 @@ if st.session_state.get("analysis_mode") == "Dağıtık Veri Fabrikası (10 Yıl
     # ─── TAB 2: Spatial Preview ───
     with tab_maps:
         st.markdown(f"""
-        <div class="card">
-            <div class="card-title">🖼️ Uzamsal {selected_index} Haritası</div>
+        <div class="geo-card">
+            <div class="geo-card-title">🖼️ Uzamsal {selected_index} Haritası</div>
         """, unsafe_allow_html=True)
         
         if cube is not None:
@@ -1512,9 +1530,9 @@ if st.session_state.get("analysis_mode") == "Dağıtık Veri Fabrikası (10 Yıl
     # ─── TAB 3: Filter Lab ───
     with tab_lab:
         st.markdown("""
-        <div class="card">
-            <div class="card-title">🔬 Görüntü İşleme Laboratuvarı</div>
-            <div class="card-subtitle">Çok bantlı uydu görüntülerine NumPy/SciPy tabanlı filtreler uygulayarak detay analizi yapın.</div>
+        <div class="geo-card">
+            <div class="geo-card-title">🔬 Görüntü İşleme Laboratuvarı</div>
+            <div class="geo-card-desc">Çok bantlı uydu görüntülerine NumPy/SciPy tabanlı filtreler uygulayarak detay analizi yapın.</div>
         """, unsafe_allow_html=True)
         
         if cube is not None:
@@ -1655,9 +1673,9 @@ if st.session_state.get("analysis_mode") == "Dağıtık Veri Fabrikası (10 Yıl
     # ─── TAB 4: Data Export ───
     with tab_download:
         st.markdown("""
-        <div class="card">
-            <div class="card-title">📥 ML Veri Seti İhracatı</div>
-            <div class="card-subtitle">Derin öğrenme modelleriniz için 5D matris küpünü ve ilişkili verileri indirin.</div>
+        <div class="geo-card">
+            <div class="geo-card-title">📥 ML Veri Seti İhracatı</div>
+            <div class="geo-card-desc">Derin öğrenme modelleriniz için 5D matris küpünü ve ilişkili verileri indirin.</div>
         """, unsafe_allow_html=True)
         
         if os.path.exists(matrix_path):
@@ -1724,9 +1742,9 @@ if st.session_state.get("analysis_mode") == "Dağıtık Veri Fabrikası (10 Yıl
     # ─── TAB: Phenology (Factory) ───
     with tab_pheno:
         st.markdown("""
-        <div class="card">
-            <div class="card-title">🌱 Fenoloji Analizi</div>
-            <div class="card-subtitle">Vejetasyon büyüme eğrisinden mevsim başlangıcı (SOS), bitiş (EOS), pik NDVI ve büyüme sezonu uzunluğu (GSL) çıkarımı.</div>
+        <div class="geo-card">
+            <div class="geo-card-title">🌱 Fenoloji Analizi</div>
+            <div class="geo-card-desc">Vejetasyon büyüme eğrisinden mevsim başlangıcı (SOS), bitiş (EOS), pik NDVI ve büyüme sezonu uzunluğu (GSL) çıkarımı.</div>
         """, unsafe_allow_html=True)
 
         if cube is not None and weight_mask is not None:
@@ -1805,9 +1823,9 @@ if st.session_state.get("analysis_mode") == "Dağıtık Veri Fabrikası (10 Yıl
     # ─── TAB: ML Dataset Studio (Factory) ───
     with tab_ml:
         st.markdown("""
-        <div class="card">
-            <div class="card-title">🧠 ML Dataset Studio</div>
-            <div class="card-subtitle">CV / CNN / Vision Transformer modelleri için üretim kalitesinde veri seti oluşturun. Patch extraction, multi-band stack, augmentation, train/val/test split.</div>
+        <div class="geo-card">
+            <div class="geo-card-title">🧠 ML Dataset Studio</div>
+            <div class="geo-card-desc">CV / CNN / Vision Transformer modelleri için üretim kalitesinde veri seti oluşturun. Patch extraction, multi-band stack, augmentation, train/val/test split.</div>
         """, unsafe_allow_html=True)
 
         if cube is not None:
@@ -1974,7 +1992,7 @@ elif st.session_state.get("analysis_mode") == "Hızlı Yerel Gözlem (Mevsimlik)
         df_avg_interp = None
     
     # ─── KPI Strip ───
-    st.markdown("""<div class="card">""", unsafe_allow_html=True)
+    st.markdown("""<div class="geo-card">""", unsafe_allow_html=True)
     
     mean_col = f"Mean_{selected_index}"
     col_k1, col_k2, col_k3, col_k4 = st.columns(4)
@@ -2011,8 +2029,8 @@ elif st.session_state.get("analysis_mode") == "Hızlı Yerel Gözlem (Mevsimlik)
     # ─── TAB 1: Time Series ───
     with tab_series:
         st.markdown(f"""
-        <div class="card">
-            <div class="card-title">📈 {selected_index} Zaman Serisi</div>
+        <div class="geo-card">
+            <div class="geo-card-title">📈 {selected_index} Zaman Serisi</div>
         """, unsafe_allow_html=True)
         
         fig_series = plot_ndvi_time_series(df_avg, df_avg_interp, index_name=selected_index)
@@ -2022,8 +2040,8 @@ elif st.session_state.get("analysis_mode") == "Hızlı Yerel Gözlem (Mevsimlik)
     # ─── TAB 2: Spatial Maps ───
     with tab_maps:
         st.markdown("""
-        <div class="card">
-            <div class="card-title">🖼️ Uzamsal Büyüme Analizi</div>
+        <div class="geo-card">
+            <div class="geo-card-title">🖼️ Uzamsal Büyüme Analizi</div>
         """, unsafe_allow_html=True)
         
         available_dates = [entry["date"] for entry in processed_data]
@@ -2081,9 +2099,9 @@ elif st.session_state.get("analysis_mode") == "Hızlı Yerel Gözlem (Mevsimlik)
     # ─── TAB 3: Filter Lab ───
     with tab_lab:
         st.markdown("""
-        <div class="card">
-            <div class="card-title">🔬 Görüntü İşleme Laboratuvarı</div>
-            <div class="card-subtitle">Çok bantlı görüntülere filtreler uygulayarak detay analizi yapın.</div>
+        <div class="geo-card">
+            <div class="geo-card-title">🔬 Görüntü İşleme Laboratuvarı</div>
+            <div class="geo-card-desc">Çok bantlı görüntülere filtreler uygulayarak detay analizi yapın.</div>
         """, unsafe_allow_html=True)
         
         col_l1, col_l2, col_l3 = st.columns(3)
@@ -2220,9 +2238,9 @@ elif st.session_state.get("analysis_mode") == "Hızlı Yerel Gözlem (Mevsimlik)
     # ─── TAB: ML Dataset Studio (Seasonal) ───
     with tab_ml:
         st.markdown("""
-        <div class="card">
-            <div class="card-title">🧠 ML Dataset Studio</div>
-            <div class="card-subtitle">CV / CNN / Vision Transformer modelleri için üretim kalitesinde veri seti oluşturun. Patch extraction, multi-band stack, augmentation, train/val/test split.</div>
+        <div class="geo-card">
+            <div class="geo-card-title">🧠 ML Dataset Studio</div>
+            <div class="geo-card-desc">CV / CNN / Vision Transformer modelleri için üretim kalitesinde veri seti oluşturun. Patch extraction, multi-band stack, augmentation, train/val/test split.</div>
         """, unsafe_allow_html=True)
 
         if processed_data:
@@ -2357,9 +2375,9 @@ elif st.session_state.get("analysis_mode") == "Hızlı Yerel Gözlem (Mevsimlik)
     # ─── TAB 4: Data Export ───
     with tab_download:
         st.markdown("""
-        <div class="card">
-            <div class="card-title">📥 ML Veri Seti İhracatı</div>
-            <div class="card-subtitle">Zaman serisi ve uzamsal modeller için veri setlerini indirin.</div>
+        <div class="geo-card">
+            <div class="geo-card-title">📥 ML Veri Seti İhracatı</div>
+            <div class="geo-card-desc">Zaman serisi ve uzamsal modeller için veri setlerini indirin.</div>
         """, unsafe_allow_html=True)
         
         # CSV - Time series
@@ -2453,9 +2471,9 @@ elif st.session_state.get("analysis_mode") == "🛸 Drone Analiz Stüdyosu (WebO
     """, unsafe_allow_html=True)
     
     # ─── File Upload & Connection Status ───
-    st.markdown("""<div class="card">""", unsafe_allow_html=True)
-    st.markdown('<div class="card-title">🛸 Fotoğraf Seti Yükle & İşle</div>', unsafe_allow_html=True)
-    st.markdown('<div class="card-subtitle">Drone ile çekilmiş GPS etiketli görüntüleri içeren .zip dosyasını yükleyin.</div>', unsafe_allow_html=True)
+    st.markdown("""<div class="geo-card">""", unsafe_allow_html=True)
+    st.markdown('<div class="geo-card-title">🛸 Fotoğraf Seti Yükle & İşle</div>', unsafe_allow_html=True)
+    st.markdown('<div class="geo-card-desc">Drone ile çekilmiş GPS etiketli görüntüleri içeren .zip dosyasını yükleyin.</div>', unsafe_allow_html=True)
     
     # Connection Check
     from src.satellite.odm_client import ODMClient
@@ -2596,9 +2614,9 @@ elif st.session_state.get("analysis_mode") == "🛸 Drone Analiz Stüdyosu (WebO
                 # 1. TAB: Orthophoto
                 with tab_ortho:
                     st.markdown("""
-                    <div class="card">
-                        <div class="card-title">🖼️ Yüksek Çözünürlüklü Ortofoto</div>
-                        <div class="card-subtitle">Drone kamerasından üretilen gerçek renkli (RGB) mozaik harita</div>
+                    <div class="geo-card">
+                        <div class="geo-card-title">🖼️ Yüksek Çözünürlüklü Ortofoto</div>
+                        <div class="geo-card-desc">Drone kamerasından üretilen gerçek renkli (RGB) mozaik harita</div>
                     """, unsafe_allow_html=True)
                     
                     # Plot orthophoto using matplotlib
@@ -2633,9 +2651,9 @@ elif st.session_state.get("analysis_mode") == "🛸 Drone Analiz Stüdyosu (WebO
                 # 2. TAB: Vegetation Indices
                 with tab_veg:
                     st.markdown("""
-                    <div class="card">
-                        <div class="card-title">🌱 Hassas Bitki Sağlığı Analizi</div>
-                        <div class="card-subtitle">Santimetre çözünürlüklü vejetasyon indeks haritası (RGB kameralar için VARI/GLI)</div>
+                    <div class="geo-card">
+                        <div class="geo-card-title">🌱 Hassas Bitki Sağlığı Analizi</div>
+                        <div class="geo-card-desc">Santimetre çözünürlüklü vejetasyon indeks haritası (RGB kameralar için VARI/GLI)</div>
                     """, unsafe_allow_html=True)
                     
                     col_idx_sel, col_thr_sel = st.columns(2)
@@ -2676,9 +2694,9 @@ elif st.session_state.get("analysis_mode") == "🛸 Drone Analiz Stüdyosu (WebO
                 # 3. TAB: Akıllı Ağaç Sayacı
                 with tab_count:
                     st.markdown("""
-                    <div class="card">
-                        <div class="card-title">🌳 Akıllı Ağaç ve Mahsul Sayacı</div>
-                        <div class="card-subtitle">Local Maxima algoritması kullanarak tarladaki bağımsız bitkileri/ağaçları otomatik olarak sayın.</div>
+                    <div class="geo-card">
+                        <div class="geo-card-title">🌳 Akıllı Ağaç ve Mahsul Sayacı</div>
+                        <div class="geo-card-desc">Local Maxima algoritması kullanarak tarladaki bağımsız bitkileri/ağaçları otomatik olarak sayın.</div>
                     """, unsafe_allow_html=True)
                     
                     col_p1, col_p2, col_p3 = st.columns(3)
@@ -2721,9 +2739,9 @@ elif st.session_state.get("analysis_mode") == "🛸 Drone Analiz Stüdyosu (WebO
                 # 4. TAB: Topography slope / DEM
                 with tab_topo:
                     st.markdown("""
-                    <div class="card">
-                        <div class="card-title">📐 Dijital Yükseklik Modeli & Topografya</div>
-                        <div class="card-subtitle">DSM verilerini kullanarak arazinin yükseklik dağılımını, eğim haritasını ve drenaj riskli çukurları inceleyin.</div>
+                    <div class="geo-card">
+                        <div class="geo-card-title">📐 Dijital Yükseklik Modeli & Topografya</div>
+                        <div class="geo-card-desc">DSM verilerini kullanarak arazinin yükseklik dağılımını, eğim haritasını ve drenaj riskli çukurları inceleyin.</div>
                     """, unsafe_allow_html=True)
                     
                     if dsm_path and os.path.exists(dsm_path):
