@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Data & outputs
+data/raw/
+/tmp/
+*.mp4
+*.gif
+*.zip
+*.npz
+*.tif
+*.tiff
+
+# Secrets
+.streamlit/secrets.toml
+
+# IDE
+.DS_Store
+.idea/
+*.swp
+.cursor/
+
+# Logs
+*.log
