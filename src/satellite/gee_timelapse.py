@@ -49,9 +49,20 @@ class GEETimelapseEngine:
     def initialize_gee(self) -> Tuple[bool, str]:
         """Earth Engine API'sini başlatır."""
         try:
-            ee.Initialize()
-            logger.info("Google Earth Engine başarıyla başlatıldı.")
-            return True, "Earth Engine başarıyla başlatıldı."
+            # Otomatik kimlik doğrulama için EARTHENGINE_TOKEN çevre değişkenini kontrol et
+            ee_token = os.getenv("EARTHENGINE_TOKEN")
+            if ee_token:
+                cred_path = os.path.expanduser("~/.config/earthengine/credentials")
+                if not os.path.exists(cred_path):
+                    os.makedirs(os.path.dirname(cred_path), exist_ok=True)
+                    with open(cred_path, "w") as f:
+                        f.write(ee_token)
+                    logger.info("EARTHENGINE_TOKEN çevre değişkeni ~/.config/earthengine/credentials dosyasına yazıldı.")
+
+            project_id = os.getenv("GEE_PROJECT", "earth-500319")
+            ee.Initialize(project=project_id)
+            logger.info(f"Google Earth Engine başarıyla başlatıldı. Proje: {project_id}")
+            return True, f"Earth Engine başarıyla başlatıldı ({project_id})."
         except Exception as e:
             err_msg = str(e)
             logger.warning(f"GEE başlatılamadı (Büyük ihtimalle kimlik doğrulama eksik): {err_msg}")
