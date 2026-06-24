@@ -1,2 +1,0 @@
-[phases.setup]
-aptPkgs = ["...", "libexpat1", "libgdal-dev", "libproj-dev", "libgeos-dev"]
