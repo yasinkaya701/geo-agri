@@ -29,7 +29,6 @@
 - [Deployment](#deployment)
 - [API Documentation](#api-documentation)
 - [Troubleshooting](#troubleshooting)
-- [License & Attribution](#license--attribution)
 
 ---
 
@@ -659,52 +658,6 @@ Please use the [GitHub Issues](https://github.com/yasinkaya701/geo-agri/issues) 
 
 ---
 
-## 📄 License & Attribution
+## 📄 License
 
-- **License**: [MIT License](LICENSE)
-- **Author**: Yasin Kaya ([@yasinkaya701](https://github.com/yasinkaya701))
-- **Maintained**: Active development as of 2024
-
-### Acknowledgments
-
-- 🙏 **ESA/Copernicus** — Sentinel-2 mission and data
-- 🙏 **Google** — Earth Engine platform and API
-- 🙏 **Microsoft** — Planetary Computer STAC catalog
-- 🙏 **Cesium** — WebGL geospatial visualization
-- 🙏 **Python Community** — NumPy, Pandas, GeoPandas, and ecosystem
-
----
-
-## 📞 Contact & Support
-
-- **Issues & Bug Reports**: [GitHub Issues](https://github.com/yasinkaya701/geo-agri/issues)
-- **Feature Requests**: [GitHub Discussions](https://github.com/yasinkaya701/geo-agri/discussions)
-- **Email Support**: [yasinkaya701@gmail.com](mailto:yasinkaya701@gmail.com)
-- **Follow Updates**: ⭐ Star the repository
-
----
-
-## 🗺️ Project Roadmap
-
-- [ ] **v2.1**: Multi-field batch processing
-- [ ] **v2.2**: React-based web frontend
-- [ ] **v2.3**: Mobile application (React Native)
-- [ ] **v2.4**: Real-time alert system (WebSockets)
-- [ ] **v2.5**: AI-powered crop disease detection (ResNet/EfficientNet)
-- [ ] **v3.0**: Blockchain-based data provenance
-- [ ] **v3.1**: Integration with drone fleets (MQTT)
-- [ ] **v3.2**: Prescriptive agronomy recommendations
-
----
-
-<div align="center">
-
-**Made with 🌱 and ❤️ by [yasinkaya701](https://github.com/yasinkaya701)**
-
-If you find this project useful, please give it a ⭐ on GitHub!
-
-![GitHub Stars](https://img.shields.io/github/stars/yasinkaya701/geo-agri)
-![GitHub Forks](https://img.shields.io/github/forks/yasinkaya701/geo-agri)
-![GitHub Issues](https://img.shields.io/github/issues/yasinkaya701/geo-agri)
-
-</div>
+This project is licensed under the [MIT License](LICENSE).
